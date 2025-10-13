@@ -2,11 +2,17 @@ package dev.Daniel.CadastroDeFuncionarios.Funcionarios;
 
 import dev.Daniel.CadastroDeFuncionarios.Cargos.CargosModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_cadastro")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class FuncionarioModel {
 
     @Id
