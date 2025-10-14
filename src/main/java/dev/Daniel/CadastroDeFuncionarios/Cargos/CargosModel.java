@@ -17,10 +17,13 @@ public class CargosModel {
 
     @Id
     @GeneratedValue
+    @Column (name = "id")
     String id;
 
+    @Column (name = "cargo")
     String Cargo;
 
+    @Column (name = "salario")
     int Salario;
 
     @OneToMany(mappedBy = "Cargo")
