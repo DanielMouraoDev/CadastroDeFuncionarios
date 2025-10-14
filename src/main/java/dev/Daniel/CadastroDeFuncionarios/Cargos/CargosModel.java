@@ -26,7 +26,7 @@ public class CargosModel {
     @Column (name = "salario")
     int Salario;
 
-    @OneToMany(mappedBy = "Cargo")
+    @OneToMany(mappedBy = "cargosModel")
     private List<FuncionarioModel> Funcionarios;
 
 }
