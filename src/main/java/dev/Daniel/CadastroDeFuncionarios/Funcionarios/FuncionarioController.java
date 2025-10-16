@@ -25,8 +25,8 @@ public class FuncionarioController {
     }
 
     @PostMapping ("/criar")
-    public String criarFuncionarios() {
-            return "Criar funcionario";
+    public FuncionarioModel criarFuncionarios(@RequestBody FuncionarioModel funcionario) {
+            return funcionariosService.criarFuncionario(funcionario);
         }
 
         @GetMapping("/listar")

@@ -14,13 +14,20 @@ public class FuncionariosService {
         this.funcionariosRepository = funcionariosRepository;
     }
 
+    //listar
     public List<FuncionarioModel> listarFuncionarios() {
         return funcionariosRepository.findAll();
     }
 
+    // listar por id
     public FuncionarioModel listarFuncionariosID(Long id) {
         Optional<FuncionarioModel> funcionarioporID = funcionariosRepository.findById(id);
         return funcionarioporID.orElse(null);
+    }
+
+    // criar
+    public FuncionarioModel criarFuncionario(FuncionarioModel funcionario) {
+        return funcionariosRepository.save(funcionario);
     }
 }
 
