@@ -19,9 +19,9 @@ public class FuncionarioController {
             return "Essa é a minha primeira menssagem na rota";
     }
 
-    @GetMapping("/listarid")
-    public String mostrarFuncionariosId() {
-        return "Mostrar funcionario por id";
+    @GetMapping("/listar/{id}")
+    public FuncionarioModel mostrarFuncionariosId(@PathVariable Long id) {
+        return funcionariosService.listarFuncionariosID(id);
     }
 
     @PostMapping ("/criar")
