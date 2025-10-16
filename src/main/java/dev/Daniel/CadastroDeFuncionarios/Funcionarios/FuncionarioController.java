@@ -2,43 +2,44 @@ package dev.Daniel.CadastroDeFuncionarios.Funcionarios;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping
 public class FuncionarioController {
+
+    private FuncionariosService funcionariosService;
+
+    public FuncionarioController(FuncionariosService funcionariosService) {
+        this.funcionariosService = funcionariosService;
+    }
 
     @GetMapping("/boasvindas")
     public String boasvindas () {
             return "Essa é a minha primeira menssagem na rota";
     }
 
-    //CREATE
-    @PostMapping
-    @GetMapping("/todosID")
+    @GetMapping("/listarid")
     public String mostrarFuncionariosId() {
         return "Mostrar funcionario por id";
     }
 
-    //READ
-
-    @GetMapping("/criar")
+    @PostMapping ("/criar")
     public String criarFuncionarios() {
             return "Criar funcionario";
         }
 
-            //READ
-            @GetMapping("/todosID")
-            public String mostrarFuncionarios() {
-                return "Mostrar funcionarios";
+        @GetMapping("/listar")
+        public List<FuncionarioModel> listarFuncionarios() {
+        return funcionariosService.listarFuncionarios();
+
             }
 
-
-            //UPDATE
             @PutMapping("alterarID")
             public String alterarFuncionariosId () {
                 return "alterar funcionario por id";
             }
 
-                //DELETE
                 @DeleteMapping("/deletarID")
                 public String deletarFuncionariosId () {
                     return "deletar funcionario por id";

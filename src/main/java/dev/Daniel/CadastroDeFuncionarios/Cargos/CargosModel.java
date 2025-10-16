@@ -1,5 +1,6 @@
 package dev.Daniel.CadastroDeFuncionarios.Cargos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.Daniel.CadastroDeFuncionarios.Funcionarios.FuncionarioModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ public class CargosModel {
     int Salario;
 
     @OneToMany(mappedBy = "cargosModel")
+    @JsonIgnore
     private List<FuncionarioModel> Funcionarios;
 
 }
