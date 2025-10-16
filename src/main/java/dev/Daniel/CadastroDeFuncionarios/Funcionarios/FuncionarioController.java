@@ -37,6 +37,7 @@ public class FuncionarioController {
             public String alterarFuncionariosId () {
                 return "alterar funcionario por id";
             }
+
                 //DELETE
                 @DeleteMapping("/deletarID")
                 public String deletarFuncionariosId () {
