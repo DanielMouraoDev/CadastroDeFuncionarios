@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/funcionarios")
 public class FuncionarioController {
 
     private FuncionariosService funcionariosService;
@@ -40,8 +40,8 @@ public class FuncionarioController {
                 return "alterar funcionario por id";
             }
 
-                @DeleteMapping("/deletarID")
-                public String deletarFuncionariosId () {
-                    return "deletar funcionario por id";
+                @DeleteMapping("/deletarID/{id}")
+                public void deletarFuncionariosId (@PathVariable Long id) {
+                    funcionariosService.deletarFuncionarioID(id);
         }
     }
