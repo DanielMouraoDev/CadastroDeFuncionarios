@@ -16,16 +16,22 @@ public class FuncionarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String nome;
 
     @Column(unique = true)
     private String email;
 
+    @Column(name = "idade")
     private int idade;
 
-    @ManyToOne(fetch = FetchType.EAGER) // <-- A SOLUÇÃO DEFINITIVA
+    @Column(name = "senioridade")
+    private String senioridade;
+
+    @ManyToOne
     @JoinColumn(name = "cargos_Id")
     private CargosModel cargosModel;
 }
