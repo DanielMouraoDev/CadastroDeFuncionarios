@@ -27,7 +27,13 @@ public class FuncionariosService {
 
     // criar
     public FuncionarioModel criarFuncionario(FuncionarioModel funcionario) {
-        return funcionariosRepository.save(funcionario);
+        FuncionarioModel funcionarioSalvo = funcionariosRepository.save(funcionario);
+        return funcionariosRepository.findById(funcionarioSalvo.getId()).orElse(null);
+    }
+
+    //deletar
+    public void deletarFuncionarioID(Long id) {
+         funcionariosRepository.deleteById(id);
     }
 }
 
