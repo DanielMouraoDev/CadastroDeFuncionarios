@@ -37,4 +37,15 @@ public class CargosService {
         public void deletarCargosID (Long id) {
         cargosRepository.deleteById(id);
     }
+
+    //ALTERAR
+
+    public CargosModel cargosAtualizado (Long id, CargosModel cargoAtualizado) {
+        if (cargosRepository.existsById(id)) {
+            return cargosRepository.save(cargoAtualizado);
+        }
+        return null;
+    }
+
+
 }

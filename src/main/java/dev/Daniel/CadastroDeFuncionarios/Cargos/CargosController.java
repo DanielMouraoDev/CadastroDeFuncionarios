@@ -30,13 +30,15 @@ public class CargosController {
         return cargosService.listarCargos();
     }
 
-    @PutMapping("/alterar")
-    public String alterarCargos() {
-        return "cargos alterado com sucesso";
+    @PutMapping("alterar/{id}")
+    public CargosModel alterarCargoID (@PathVariable Long id, @RequestBody CargosModel cargoAtualizado) {
+        return cargosService.cargosAtualizado(id, cargoAtualizado);
     }
 
     @DeleteMapping("/deletarID/{id}")
     public void deletarCargosID (long id) {
         cargosService.deletarCargosID(id);
     }
+
+
 }
