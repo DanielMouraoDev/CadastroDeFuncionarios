@@ -1,17 +1,19 @@
 package dev.Daniel.CadastroDeFuncionarios.Funcionarios;
 
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class FuncionariosService {
 
-    private FuncionariosRepository funcionariosRepository;
+    private final FuncionariosRepository funcionariosRepository;
+    private final FuncionarioMapper funcionarioMapper;
 
-    public FuncionariosService(FuncionariosRepository funcionariosRepository) {
+    // APENAS UM CONSTRUTOR. Agora o Spring sabe exatamente o que fazer.
+    public FuncionariosService(FuncionariosRepository funcionariosRepository, FuncionarioMapper funcionarioMapper) {
         this.funcionariosRepository = funcionariosRepository;
+        this.funcionarioMapper = funcionarioMapper;
     }
 
     //listar
@@ -26,18 +28,18 @@ public class FuncionariosService {
     }
 
     // criar
-    public FuncionarioModel criarFuncionario(FuncionarioModel funcionario) {
-        FuncionarioModel funcionarioSalvo = funcionariosRepository.save(funcionario);
-        return funcionariosRepository.findById(funcionarioSalvo.getId()).orElse(null);
+    public FuncionarioDTO criarFuncionario(FuncionarioDTO funcionarioDTO) {
+        FuncionarioModel funcionario = funcionarioMapper.map(funcionarioDTO);
+        funcionario = funcionariosRepository.save(funcionario);
+        return funcionarioMapper.map(funcionario);
     }
 
     //deletar
     public void deletarFuncionarioID(Long id) {
-         funcionariosRepository.deleteById(id);
+        funcionariosRepository.deleteById(id);
     }
 
     //ALTERAR
-
     public FuncionarioModel atualizarFuncionario (Long id, FuncionarioModel funcionarioAtualizado) {
         if (funcionariosRepository.existsById(id)) {
             funcionarioAtualizado.setId(id);
@@ -46,6 +48,3 @@ public class FuncionariosService {
         return null;
     }
 }
-
-
-
