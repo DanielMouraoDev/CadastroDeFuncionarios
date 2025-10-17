@@ -1,19 +1,33 @@
 package dev.Daniel.CadastroDeFuncionarios.Cargos;
 
+import dev.Daniel.CadastroDeFuncionarios.Funcionarios.FuncionarioModel;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("cargos")
 public class CargosController {
 
-    @GetMapping("/listar")
-    public String listarCargos() {
-        return "cargos retornados com sucesso";
+    private CargosService cargosService;
+
+    public CargosController(CargosService cargosService) {
+        this.cargosService = cargosService;
     }
 
     @PostMapping("/criar")
-    public String criarCargos() {
-        return "cargos criados com sucesso";
+    public CargosModel criarCargos(@RequestBody CargosModel cargos) {
+        return cargosService.criarCargos(cargos);
+    }
+
+    @GetMapping("/listar/{id}")
+    public CargosModel listarCargosID(@PathVariable Long id) {
+        return cargosService.listarCargosID(id);
+    }
+
+    @GetMapping("/listar")
+    public List<CargosModel> listarcargos() {
+        return cargosService.listarCargos();
     }
 
     @PutMapping("/alterar")
@@ -21,8 +35,8 @@ public class CargosController {
         return "cargos alterado com sucesso";
     }
 
-    @DeleteMapping("/delete")
-    public String deletarCargos() {
-        return "cargos deletados com sucesso";
+    @DeleteMapping("/deletarID/{id}")
+    public void deletarCargosID (long id) {
+        cargosService.deletarCargosID(id);
     }
 }

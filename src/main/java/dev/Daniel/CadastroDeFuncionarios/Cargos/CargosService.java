@@ -32,4 +32,9 @@ public class CargosService {
         public CargosModel criarCargos(CargosModel cargos) {
         return cargosRepository.save(cargos);
     }
+    //DELETAR
+
+        public void deletarCargosID (Long id) {
+        cargosRepository.deleteById(id);
+    }
 }

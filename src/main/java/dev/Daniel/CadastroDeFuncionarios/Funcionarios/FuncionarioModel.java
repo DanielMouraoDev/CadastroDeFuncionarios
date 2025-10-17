@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
-
 @Entity
 @Table(name = "tb_cadastro")
 @NoArgsConstructor
@@ -18,19 +16,16 @@ public class FuncionarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
     private Long id;
 
-    @Column (name = "nome")
     private String nome;
 
-    @Column (unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column (name = "idade")
     private int idade;
 
-    @ManyToOne
-    @JoinColumn(name = "cargos_Id") // foreign key
+    @ManyToOne(fetch = FetchType.EAGER) // <-- A SOLUÇÃO DEFINITIVA
+    @JoinColumn(name = "cargos_Id")
     private CargosModel cargosModel;
 }
