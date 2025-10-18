@@ -1,44 +1,50 @@
 package dev.Daniel.CadastroDeFuncionarios.Cargos;
 
-import dev.Daniel.CadastroDeFuncionarios.Funcionarios.FuncionarioModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("cargos")
 public class CargosController {
 
-    private CargosService cargosService;
+    private final CargosService cargosService;
 
     public CargosController(CargosService cargosService) {
         this.cargosService = cargosService;
     }
 
     @PostMapping("/criar")
-    public CargosModel criarCargos(@RequestBody CargosModel cargos) {
-        return cargosService.criarCargos(cargos);
+    public CargosDTO criarCargos(@RequestBody CargosDTO cargosDTO) {
+        return cargosService.criarCargos(cargosDTO);
     }
 
     @GetMapping("/listar/{id}")
-    public CargosModel listarCargosID(@PathVariable Long id) {
-        return cargosService.listarCargosID(id);
+    public ResponseEntity<CargosDTO> listarCargosID(@PathVariable Long id) {
+        CargosDTO cargo = cargosService.listarCargosID(id);
+        if (cargo != null) {
+            return ResponseEntity.ok(cargo);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/listar")
-    public List<CargosModel> listarcargos() {
+    public List<CargosDTO> listarcargos() {
         return cargosService.listarCargos();
     }
 
-    @PutMapping("alterar/{id}")
-    public CargosModel alterarCargoID (@PathVariable Long id, @RequestBody CargosModel cargoAtualizado) {
-        return cargosService.cargosAtualizado(id, cargoAtualizado);
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<CargosDTO> alterarCargoID(@PathVariable Long id, @RequestBody CargosDTO cargosDTO) {
+        CargosDTO cargoAtualizado = cargosService.atualizarCargo(id, cargosDTO);
+        if (cargoAtualizado != null) {
+            return ResponseEntity.ok(cargoAtualizado);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/deletarID/{id}")
-    public void deletarCargosID (long id) {
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> deletarCargosID(@PathVariable Long id) {
         cargosService.deletarCargosID(id);
+        return ResponseEntity.noContent().build();
     }
-
-
 }
