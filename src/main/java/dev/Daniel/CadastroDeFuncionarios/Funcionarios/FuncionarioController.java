@@ -1,5 +1,6 @@
 package dev.Daniel.CadastroDeFuncionarios.Funcionarios;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,33 +16,34 @@ public class FuncionarioController {
     }
 
     @GetMapping("/boasvindas")
-    public String boasvindas () {
-            return "Essa é a minha primeira menssagem na rota";
+    public String boasvindas() {
+        return "Essa é a minha primeira menssagem na rota";
     }
 
     @GetMapping("/listar/{id}")
-    public FuncionarioModel mostrarFuncionariosId(@PathVariable Long id) {
+    public FuncionarioDTO mostrarFuncionariosId(@PathVariable Long id) {
         return funcionariosService.listarFuncionariosID(id);
     }
 
-    @PostMapping ("/criar")
-    public FuncionarioModel criarFuncionarios(@RequestBody FuncionarioModel funcionario) {
-            return funcionariosService.criarFuncionario(funcionario);
-        }
-
-        @GetMapping("/listar")
-        public List<FuncionarioModel> listarFuncionarios() {
+    @GetMapping("/listar")
+    public List<FuncionarioDTO> listarFuncionarios() {
         return funcionariosService.listarFuncionarios();
-
-            }
-
-            @PutMapping("alterarID")
-            public String alterarFuncionariosId () {
-                return "alterar funcionario por id";
-            }
-
-                @DeleteMapping("/deletarID/{id}")
-                public void deletarFuncionariosId (@PathVariable Long id) {
-                    funcionariosService.deletarFuncionarioID(id);
-        }
     }
+
+    @PostMapping("/criar")
+    public FuncionarioDTO criarFuncionarios(@RequestBody FuncionarioDTO funcionarioDTO) {
+        return funcionariosService.criarFuncionario(funcionarioDTO);
+    }
+
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<FuncionarioDTO> alterarFuncionariosId(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioAtualizado) {
+        FuncionarioDTO funcionario = funcionariosService.atualizarFuncionario(id, funcionarioAtualizado);
+        return null;
+    }
+
+    @DeleteMapping("/deletar/{id}")
+    public void deletarFuncionariosId(@PathVariable Long id) {
+        funcionariosService.deletarFuncionarioID(id);
+
+    }
+}

@@ -1,35 +1,55 @@
 package dev.Daniel.CadastroDeFuncionarios.Cargos;
 
-import dev.Daniel.CadastroDeFuncionarios.Funcionarios.FuncionarioModel;
-import dev.Daniel.CadastroDeFuncionarios.Funcionarios.FuncionariosRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CargosService {
 
-    private CargosRepository cargosRepository;
+    private final CargosRepository cargosRepository;
+    private final CargosMapper cargosMapper;
 
-    public CargosService(CargosRepository cargosRepositoryRepository) {
-        this.cargosRepository = cargosRepositoryRepository;
+    public CargosService(CargosRepository cargosRepository, CargosMapper cargosMapper) {
+        this.cargosRepository = cargosRepository;
+        this.cargosMapper = cargosMapper;
     }
 
-    //LISTAR
-
-    public List<CargosModel> listarCargos() {
-        return cargosRepository.findAll();
+    // LISTAR TODOS
+    public List<CargosDTO> listarCargos() {
+        List<CargosModel> cargos = cargosRepository.findAll();
+        return cargos.stream()
+                .map(cargosMapper::map)
+                .collect(Collectors.toList());
     }
-        //LISTARPORID
 
-        public CargosModel listarCargosID(Long id) {
-            Optional<CargosModel> cargosporID = cargosRepository.findById(id);
-            return cargosporID.orElse(null);
+    // LISTAR POR ID
+    public CargosDTO listarCargosID(Long id) {
+        Optional<CargosModel> cargosporID = cargosRepository.findById(id);
+        return cargosporID.map(cargosMapper::map).orElse(null);
     }
-        //CRIAR
 
-        public CargosModel criarCargos(CargosModel cargos) {
-        return cargosRepository.save(cargos);
+    // CRIAR
+    public CargosDTO criarCargos(CargosDTO cargosDTO) {
+        CargosModel cargo = cargosMapper.map(cargosDTO);
+        cargo = cargosRepository.save(cargo);
+        return cargosMapper.map(cargo);
+    }
+
+    // DELETAR
+    public void deletarCargosID(Long id) {
+        cargosRepository.deleteById(id);
+    }
+
+    // ALTERAR
+    public CargosDTO atualizarCargo(Long id, CargosDTO cargosDTO) {
+        if (cargosRepository.existsById(id)) {
+            CargosModel cargoAtualizado = cargosMapper.map(cargosDTO);
+            cargoAtualizado.setId(id); // Garante que o ID correto está sendo atualizado
+            CargosModel cargoSalvo = cargosRepository.save(cargoAtualizado);
+            return cargosMapper.map(cargoSalvo);
+        }
+        return null;
     }
 }
