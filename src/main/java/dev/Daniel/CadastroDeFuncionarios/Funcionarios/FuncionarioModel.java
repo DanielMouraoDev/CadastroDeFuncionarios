@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import jakarta.persistence.FetchType;
 
 @Entity
 @Table(name = "tb_cadastro")
@@ -31,7 +32,7 @@ public class FuncionarioModel {
     @Column(name = "senioridade")
     private String senioridade;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER) // traz os dados de cargos
     @JoinColumn(name = "cargos_Id")
     private CargosModel cargosModel;
 }

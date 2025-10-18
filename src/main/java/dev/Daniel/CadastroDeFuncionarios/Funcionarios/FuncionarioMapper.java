@@ -28,6 +28,9 @@ public class FuncionarioMapper {
         funcionarioDTO.setIdade(funcionarioModel.getIdade());
         funcionarioDTO.setSenioridade(funcionarioModel.getSenioridade());
 
+        // converte FuncionarioModel para FuncionarioDTO
+        funcionarioDTO.setCargo(funcionarioModel.getCargosModel());
+
         return funcionarioDTO;
 
     }
