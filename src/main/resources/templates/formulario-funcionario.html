@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Funcionário</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 40px; background-color: #f4f7f6; color: #333; }
+        form { background-color: white; padding: 25px 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 20px auto; }
+        h1 { color: #2c3e50; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #009879; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; font-weight: bold; }
+        button:hover { background-color: #007a63; }
+        .back-link { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; }
+    </style>
+</head>
+<body>
+<form th:action="@{/funcionarios/ui/salvar}" th:object="${funcionario}" method="post">
+    <h1 th:text="${funcionario.id == null ? 'Cadastrar Novo Funcionário' : 'Alterar Funcionário'}">Título do Formulário</h1>
+
+    <input type="hidden" th:field="*{id}" />
+
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" required />
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required />
+    </div>
+    <div class="form-group">
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" th:field="*{idade}" required />
+    </div>
+    <div class="form-group">
+        <label for="senioridade">Senioridade:</label>
+        <input type="text" id="senioridade" th:field="*{senioridade}" />
+    </div>
+    <div class="form-group">
+        <label for="cargo">Cargo:</label>
+        <select id="cargo" th:field="*{cargoId}">
+            <option value="">Selecione um cargo</option>
+            <option th:each="cargoOpcao : ${todosCargos}"
+                    th:value="${cargoOpcao.id}"
+                    th:text="${cargoOpcao.cargo}"></option>
+        </select>
+    </div>
+
+    <button type="submit">Salvar</button>
+    <a th:href="@{/funcionarios/ui/listar}" class="back-link">Cancelar</a>
+</form>
+</body>
+</html>

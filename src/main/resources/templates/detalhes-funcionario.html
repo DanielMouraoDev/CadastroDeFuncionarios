@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Funcionário</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 40px; background-color: #f4f7f6; color: #333; }
+        .card { background-color: white; padding: 25px 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 20px auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #009879; padding-bottom: 10px; }
+        p { font-size: 1.1em; line-height: 1.6; }
+        strong { color: #009879; }
+        .back-link { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; font-weight: bold; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1 th:text="${funcionario.nome}">Nome do Funcionário</h1>
+    <p><strong>ID:</strong> <span th:text="${funcionario.id}">0</span></p>
+    <p><strong>Email:</strong> <span th:text="${funcionario.email}">email@exemplo.com</span></p>
+    <p><strong>Idade:</strong> <span th:text="${funcionario.idade}">0</span></p>
+    <p><strong>Senioridade:</strong> <span th:text="${funcionario.senioridade}">N/A</span></p>
+    <p><strong>Cargo:</strong> <span th:text="${funcionario.cargo != null ? funcionario.cargo.cargo : 'N/A'}">Cargo</span></p>
+
+    <a th:href="@{/funcionarios/ui/listar}" class="back-link">← Voltar para a lista</a>
+</div>
+</body>
+</html>

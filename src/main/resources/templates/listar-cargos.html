@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela de Cargos</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 40px; background-color: #f4f7f6; color: #333; }
+        h1 { color: #2c3e50; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.9em; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); border-radius: 8px; overflow: hidden; }
+        table thead tr { background-color: #009879; color: #ffffff; text-align: left; font-weight: bold; }
+        table th, table td { padding: 12px 15px; }
+        table tbody tr { border-bottom: 1px solid #dddddd; }
+        table tbody tr:nth-of-type(even) { background-color: #f3f3f3; }
+        td a, .btn-novo { display: inline-block; padding: 8px 12px; margin: 0 4px; border-radius: 4px; text-decoration: none; color: white; font-weight: 600; font-size: 0.85em; text-align: center; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+        .btn-novo { background-color: #27ae60; margin-bottom: 20px; }
+        td a:hover, .btn-novo:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
+        a:nth-of-type(1) { background-color: #f39c12; }
+        a:nth-of-type(2) { background-color: #e74c3c; }
+    </style>
+</head>
+<body>
+<h1>Lista de Cargos</h1>
+<a th:href="@{/cargos/ui/novo}" class="btn-novo">Novo Cargo</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome do Cargo</th>
+        <th>Salário</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cargo : ${cargos}">
+        <td th:text="${cargo.id}"></td>
+        <td th:text="${cargo.cargo}"></td>
+        <td th:text="${'R$ ' + #numbers.formatDecimal(cargo.salario, 1, 'POINT', 2, 'COMMA')}"></td>
+        <td>
+            <a th:href="@{/cargos/ui/alterar/{id}(id=${cargo.id})}">Alterar</a>
+            <a th:href="@{/cargos/ui/deletar/{id}(id=${cargo.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

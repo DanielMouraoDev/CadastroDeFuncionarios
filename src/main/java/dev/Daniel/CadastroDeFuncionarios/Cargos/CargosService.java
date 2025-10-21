@@ -42,7 +42,6 @@ public class CargosService {
         cargosRepository.deleteById(id);
     }
 
-    // ALTERAR
     public CargosDTO atualizarCargo(Long id, CargosDTO cargosDTO) {
         if (cargosRepository.existsById(id)) {
             CargosModel cargoAtualizado = cargosMapper.map(cargosDTO);
