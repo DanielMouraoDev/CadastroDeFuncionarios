@@ -45,7 +45,7 @@ public class CargosService {
     public CargosDTO atualizarCargo(Long id, CargosDTO cargosDTO) {
         if (cargosRepository.existsById(id)) {
             CargosModel cargoAtualizado = cargosMapper.map(cargosDTO);
-            cargoAtualizado.setId(id); // Garante que o ID correto está sendo atualizado
+            cargoAtualizado.setId(id);
             CargosModel cargoSalvo = cargosRepository.save(cargoAtualizado);
             return cargosMapper.map(cargoSalvo);
         }

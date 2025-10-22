@@ -13,7 +13,7 @@ import jakarta.persistence.FetchType;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ToString(exclude = "Cargos")
+@ToString(exclude = "cargosModel")
 public class FuncionarioModel {
 
     @Id
