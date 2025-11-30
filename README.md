@@ -1,10 +1,10 @@
 # CadastroDeFuncionarios
 Bem-vindo ao Sistema de Cadastro de Funcionarios!
-Este projeto é uma aplicação de arquitetura em camadas desenvolvida com Spring Boot, projetada para cadastrar funcionarios e suas respectivas missões. O projeto utiliza H2 como banco de dados em memória, Flyway para migrações de banco de dados e segue boas práticas de desenvolvimento de software como controle de versão com Git e hospedagem de repositório no GitHub. 
+Este projeto é uma aplicação de arquitetura em camadas desenvolvida com Spring Boot, projetada para cadastrar funcionarios e seus respectivos cargos. O projeto utiliza H2 como banco de dados em memória, Flyway para migrações de banco de dados e segue boas práticas de desenvolvimento de software como controle de versão com Git e hospedagem de repositório no GitHub. 
 
 **Visão Geral do Projeto**
 
-Este sistema foi desenvolvido para gerenciar funcionarios e suas missões. Cada  funcionario pode ser atribuído um unico cargo, enquanto um cargo pode ser associada a vários funcionarios. As principais funcionalidades incluem:
+Este sistema foi desenvolvido para gerenciar funcionarios e seus cargos. Cada  funcionario pode ser atribuído um unico cargo, enquanto um cargo pode ser associada a vários funcionarios. As principais funcionalidades incluem:
 
 Cadastro de funcionarios com nome, idade, email e senioridade.
 Atribuição de um cargo para um funcionario.
